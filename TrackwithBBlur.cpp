@@ -167,14 +167,9 @@ int main(int argc, char* argv[])
         if (frame.empty()) break;
 
         if (frame_number % 70 == 0) {
-
-
+k
             bboxes = model_inference(frame, bboxes, model);
 
-            // quit if there are no objects to track
-            if (bboxes.size() < 1) {
-                return 0;
-            }
             vector<Scalar> colors;
             getRandomColors(colors, bboxes.size());
 
@@ -190,6 +185,9 @@ int main(int argc, char* argv[])
                 multiTracker->add(createTrackerByName(trackerType), frame, Rect2d(bboxes[i]));
 
             delete var;
+        }
+        else if (bboxes.size() < 1 && frame_number % 70 != 0) {
+
         }
 
         else {
